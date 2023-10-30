@@ -46,3 +46,4 @@ app.*.map.json
 google-services.json
 constants.dart
 firebase_options.dart
+GoogleService-Info.plist

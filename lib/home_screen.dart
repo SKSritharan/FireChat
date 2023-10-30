@@ -11,9 +11,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const String appKey = "";
-  static const String userId = "";
-  String token = "";
+  static const String appKey = "611047697#1224169";
+  static const String userId = "FC001";
+  String token =
+      "007eJxTYKh3eWa54eiU9xen5l+dtvrj/iX2wdMmxp1S2/V0u71PZX+NAoORhUVymmVaapK5YZqJkbm5RZKFQWKSuYmZhaVZarKxRWCHVWpDICND9eFsBkYGViBmZADxVRiSjVINkwwsDXTNTQxNdQ0NU1N1LRMtk3WTzc0NzA1TLU3MTFIArCcpgA==";
 
   late ChatClient agoraChatClient;
   bool isJoined = false;
@@ -48,15 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void setupListeners() {
-
     agoraChatClient.addConnectionEventHandler(
       "CONNECTION_HANDLER",
       ConnectionEventHandler(
           onConnected: onConnected,
           onDisconnected: onDisconnected,
           onTokenWillExpire: onTokenWillExpire,
-          onTokenDidExpire: onTokenDidExpire
-      ),
+          onTokenDidExpire: onTokenDidExpire),
     );
 
     agoraChatClient.chatManager.addEventHandler(
@@ -85,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void onTokenDidExpire() {
     // The token has expired
   }
-  void onDisconnected () {
+  void onDisconnected() {
     // Disconnected from the Chat server
   }
   void onConnected() {
@@ -93,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void joinLeave() async {
-    if (!isJoined) { // Log in
+    if (!isJoined) {
+      // Log in
       try {
         await agoraChatClient.loginWithAgoraToken(userId, token);
         showLog("Logged in successfully as $userId");
@@ -101,7 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
           isJoined = true;
         });
       } on ChatError catch (e) {
-        if (e.code == 200) { // Already logged in
+        if (e.code == 200) {
+          // Already logged in
           setState(() {
             isJoined = true;
           });
@@ -109,7 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
           showLog("Login failed, code: ${e.code}, desc: ${e.description}");
         }
       }
-    } else { // Log out
+    } else {
+      // Log out
       try {
         await agoraChatClient.logout(true);
         showLog("Logged out successfully");
@@ -152,13 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
     agoraChatClient.chatManager.sendMessage(msg);
   }
 
-
   void displayMessage(String text, bool isSentMessage) {
     messageList.add(Row(children: [
       Expanded(
         child: Align(
           alignment:
-          isSentMessage ? Alignment.centerRight : Alignment.centerLeft,
+              isSentMessage ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             padding: const EdgeInsets.all(10),
             margin: EdgeInsets.fromLTRB(

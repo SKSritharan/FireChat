@@ -1,3 +1,4 @@
+import 'package:fire_chat/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,8 +64,13 @@ class HomeScreen extends GetWidget<HomeController> {
                   ),
               ],
             ),
+            onTap: () => Get.toNamed(AppRoutes.chatScreen),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed(AppRoutes.contactsScreen),
+        child: const Icon(Icons.chat_bubble),
       ),
     );
   }
